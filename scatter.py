@@ -19,7 +19,8 @@ for l in sys.stdin:
         X.append(float(i))
         try:
             Y.append(float(A[0]))
-        except Y.append(float((len(A[0]))))
+        except:
+            Y.append(float(len(A[0])))
         i += 1
 
 width = 3
