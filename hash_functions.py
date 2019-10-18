@@ -1,4 +1,5 @@
 import sys
+import random
 
 def h_ascii(key, N):  #hash fct that takes string key and hash table size
     s = 0
@@ -34,3 +35,12 @@ def h_rolling(key, N, p=53, m=2**64): #rolling polynomial hash
             s += ord(key[i]) * p**i
             s = s % m
         return s % N
+
+if __name__ == '__main__':
+    for l in open(sys.argv[1]):
+        if sys.argv[2]=='ascii':
+            print(l, h_ascii(l, 1000))
+        elif sys.argv[2]=='rolling':
+            print(l, h_rolling(l, 1000))
+        elif sys.argv[2]=='square':
+            print(l, h_square(l, 1000))
