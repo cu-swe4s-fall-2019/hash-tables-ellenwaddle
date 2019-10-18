@@ -16,5 +16,4 @@ script:
   - pycodestyle hash_functions.py
   - pycodestyle test_hash_functions.py
   - pycodestyle hash_tables.py
-  - pycodestyle scatter.py
   - python test_hash_functions.py

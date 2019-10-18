@@ -24,7 +24,7 @@ def h_square(key, N):
         for i in range(len(key)):
             s += ord(key[i])
         s = s*s + random.randint(0, 100)
-        s = s % 17 * random.randint(0,10)
+        s = s % 17 * random.randint(0, 10)
         return s
 
 
