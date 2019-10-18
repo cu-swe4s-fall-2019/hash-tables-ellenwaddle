@@ -15,5 +15,7 @@ before_install:
 script:
   - pycodestyle hash_functions.py
   - pycodestyle test_hash_functions.py
+  - pycodestyle hash_tables.py
+  - pycodestyle scatter.py
   - python test_hash_functions.py
-  
+  - bash test_hash_tables.sh 
