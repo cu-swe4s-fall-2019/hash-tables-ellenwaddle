@@ -3,6 +3,7 @@ import sys
 import time
 import random
 
+
 def reservoir_sampling(new_val, size, V):
     if len(V) < size:
         V.append(new_val)
@@ -10,6 +11,7 @@ def reservoir_sampling(new_val, size, V):
         j = random.randint(0, len(V))
         if j < len(V):
             V[j] = new_val
+
 
 class LinearProbe:
     def __init__(self, N, hash_function):
@@ -23,7 +25,7 @@ class LinearProbe:
 
         for i in range(self.N):
             test_slot = (start_hash + i) % self.N
-            if self.T[test_slot] == None:
+            if self.T[test_slot] is None:
                 self.T[test_slot] = (key, value)
                 self.M += 1
                 return True
@@ -34,17 +36,18 @@ class LinearProbe:
 
         for i in range(self.N):
             test_slot = (start_hash + i) % self.N
-            if self.T[test_slot] == None:
+            if self.T[test_slot] is None:
                 return None
             if self.T[test_slot][0] == key:
                 return self.T[test_slot][1]
         return None
 
+
 class ChainedHash:
     def __init__(self, N, hash_function):
         self.hash_function = hash_function
         self.N = N
-        self.T = [ [] for i in range(N)]
+        self.T = [[] for i in range(N)]
         self.M = 0
 
     def add(self, key, value):
@@ -56,15 +59,16 @@ class ChainedHash:
     def search(self, key):
         start_hash = self.hash_function(key, self.N)
 
-        for k,v in self.T[start_hash]:
+        for k, v in self.T[start_hash]:
             if key == k:
                 return v
         return None
 
+
 if __name__ == '__main__':
     N = int(sys.argv[1])
     hash_alg = sys.argv[2]  # ascii, rolling, or square
-    collision_strategy = sys.argv[3]  #linear or chain
+    collision_strategy = sys.argv[3]  # linear or chain
     data_file_name = sys.argv[4]
     keys_to_add = int(sys.argv[5])
 
