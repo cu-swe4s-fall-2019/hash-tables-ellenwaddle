@@ -51,12 +51,13 @@ class ChainedHash:
         self.N = N
         self.T = [[] for i in range(N)]
         self.M = 0
+        self.keys = []
 
     def add(self, key, value):
         start_hash = self.hash_function(key, self.N)
         self.T[start_hash] = self.hash(key, self.N)
         self.M += 1
-        keys=keys.append(key)  #store the set of keys stored in hash table
+        self.keys.append(key)  #store the set of keys stored in hash table
         return True
 
     def search(self, key):
