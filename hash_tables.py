@@ -44,6 +44,8 @@ class LinearProbe:
 
 
 class ChainedHash:
+    keys = []
+
     def __init__(self, N, hash_function):
         self.hash_function = hash_function
         self.N = N
@@ -54,6 +56,7 @@ class ChainedHash:
         start_hash = self.hash_function(key, self.N)
         self.T[start_hash] = self.hash(key, self.N)
         self.M += 1
+        keys=keys.append(key)  #store the set of keys stored in hash table
         return True
 
     def search(self, key):
@@ -67,30 +70,17 @@ class ChainedHash:
 
 if __name__ == '__main__':
     N = int(sys.argv[1])
-    hash_alg = sys.argv[2]  # ascii, rolling, or square
+    hash_alg = 'rolling'  # ascii, rolling, or square
     collision_strategy = sys.argv[3]  # linear or chain
     data_file_name = sys.argv[4]
     keys_to_add = int(sys.argv[5])
 
     ht = None
 
-    if hash_alg == 'ascii':
-        if collision_strategy == 'linear':
-            ht = LinearProbe(N, hash_functions.h_ascii)
-        elif collision_strategy == 'chain':
-            ht = ChainHash(N, hash_functions.h_ascii)
-
-    elif hash_alg == 'rolling':
-        if collision_strategy == 'linear':
-            ht = LinearProbe(N, hash_functions.h_rolling)
-        elif collision_strategy == 'chain':
-            ht = ChainHash(N, hash_functions.h_rolling)
-
-    elif hash_alg == 'square':
-        if collision_strategy == 'linear':
-            ht = LinearProbe(N, hash_functions.h_square)
-        elif collision_strategy == 'chain':
-            ht = ChainHash(N, hash_functions.h_square)
+    if collision_strategy == 'linear':
+        ht = LinearProbe(N, hash_functions.h_rolling)
+    elif collision_strategy == 'chain':
+        ht = ChainHash(N, hash_functions.h_rolling)
 
     keys_to_search = 100
     V = []
